@@ -98,26 +98,10 @@
         var path      = item.data('item-path');
         updateServerItem(path, { 'completed': completed, 'completed@TypeHint': 'Boolean' });
     }
-
-    /**
-     * Complete/reopen all todo items
-     */
-    function toggleAll() {
-        var toggle      = $(this);
-        var itemToggles = todoapp.find(toggle.is(':checked') ? '.toggle:checked' : ':not(.toggle:checked)');
-        /*
-        var item        = toggle.closest('[data-item-path]');
-        var completed   = toggle.is(':checked');
-        var path        = item.data('item-path');
-        updateServerItem(path, { 'completed': completed, 'completed@TypeHint': 'Boolean' });
-        */
-    }
     
     todoapp.on('keypress', '#new-todo', addItem);
     todoapp.on('dblclick', '.view', editItem);
     todoapp.on('blur keypress', '.edit', displayItem);
     todoapp.on('click', '.destroy', destroyItem);
     todoapp.on('click', '.toggle', toggleItem);
-    todoapp.on('click', '#toggle-all', toggleAll);
-
 })(jQuery);
