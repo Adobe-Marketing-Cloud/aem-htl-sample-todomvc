@@ -45,7 +45,7 @@ If you are interested to learn how we came up with Sightly, check out the [Behin
 
 The way this web app works is that each action performed on the client triggers an asynchronous (ajax) POST to the server, which manipulates the server content accordingly thanks to the [SlingPostServlet](http://sling.apache.org/documentation/bundles/manipulating-content-the-slingpostservlet-servlets-post.html). The markup parts of the page that need to be updated are then retreived again with a GET requests (this could later be optimized to do only one asynchronous request).
 
-#### Server-side components:
+#### Server-side components
 * **[Page](http://localhost:4502/crx/de/index.jsp#/apps/todo/components/page):** Renders the page
   * `page.html`: Entry point: The outer page markup that doesn't change when todo actions are performed.
   * `main.html`: The list of todo items - this is reloaed upon actions performed.
@@ -54,7 +54,7 @@ The way this web app works is that each action performed on the client triggers 
 * **[Item](http://localhost:4502/crx/de/index.jsp#/apps/todo/components/item):** Renders the todo item
   * `item.html`: Entry point: Contains the full markup for an item.
 
-##### The client-side parts:
+#### The client-side parts
 * **[Clientlib](http://localhost:4502/crx/de/index.jsp#/etc/designs/todo/clientlib):** Client libraries can conveniently combine and minimize all files.
   * **CSS**
     * `base.css`: The style base provided by the [TodoMVC template](https://github.com/tastejs/todomvc/tree/gh-pages/template).
