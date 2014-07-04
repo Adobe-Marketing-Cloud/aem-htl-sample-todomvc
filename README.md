@@ -11,8 +11,8 @@ The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-
 Get help from other Framework Name users:
 
 * [Sightly](https://twitter.com/sightlyio)
-* [Gabriel](https://twitter.com/gabrielwalt)
 * [Senol](https://twitter.com/thelabertasch)
+* [Gabriel](https://twitter.com/gabrielwalt)
 
 If you are interested to learn how we came up with Sightly, check out the [Behind the Scenes Youtube channel](https://www.youtube.com/playlist?list=PLkBe8kbE_7-xeo5uNJVE4uZXRpOpCA0J8).
 
