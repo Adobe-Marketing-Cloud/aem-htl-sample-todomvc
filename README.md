@@ -19,9 +19,12 @@ If you are interested to learn how we came up with Sightly, check out the [Behin
 ## Running it
 
 * **Create package**
-  * Create a ZIP file from the `apps` folder (`jcr_root` and `META-INF` must be top-level content of the ZIP).
+  * Create a ZIP file from the `apps` folder, for e.g. in a Unix shell you can do:
+    * `cd apps`
+    * `zip TodoMVC.zip -r jcr_root META-INF`
 * **Start AEM**
-  * Double-click the AEM JAR and login.
+  * Double-click on the AEM JAR to start an instance if you haven't done that already.
+  * Once you're prompted with a login in your browser, enter `admin` as username and password.
 * **Install package**
   * Goto the [AEM Package Manager](http://localhost:4502/crx/packmgr/index.jsp).
   * Click on `Upload package` and browse for your ZIP file, then hit `OK`.
