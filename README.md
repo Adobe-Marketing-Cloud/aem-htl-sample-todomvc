@@ -54,8 +54,8 @@ The way this web app works is that each action performed on the client triggers 
 * **[Item](http://localhost:4502/crx/de/index.jsp#/apps/todo/components/item):** Renders the todo item
   * `item.html`: Entry point: Contains the full markup for an item.
 
-#### The client-side parts
-* **[Clientlib](http://localhost:4502/crx/de/index.jsp#/etc/designs/todo/clientlib):** Client libraries can conveniently combine and minimize all files.
+#### The client-side libraries
+* **[Clientlib](http://localhost:4502/crx/de/index.jsp#/etc/designs/todo/clientlib):** [Client libraries](http://dev.day.com/docs/en/cq/current/developing/clientlibs.html) can conveniently combine and minimize the files.
   * **CSS**
     * `base.css`: The style base provided by the [TodoMVC template](https://github.com/tastejs/todomvc/tree/gh-pages/template).
     * `app.css`: The additional styles specific to this project.
