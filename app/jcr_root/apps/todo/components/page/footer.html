@@ -1,0 +1,15 @@
+<span id="todo-count" data-sly-use.count="count.js"> ${properties.labelCountOpen @ format=count.open}</span>
+<!--/*
+<ul id="filters">
+    <li>
+        <a class="selected" href="#/">${properties.labelSelectAll}</a>
+    </li>
+    <li>
+        <a href="#/active">${properties.labelSelectActive}</a>
+    </li>
+    <li>
+        <a href="#/completed">${properties.labelSelectCompleted}</a>
+    </li>
+</ul>
+*/-->
+<button id="clear-completed" data-sly-test="${count.completed}">${properties.labelClearCompleted @ format=count.completed}</button>

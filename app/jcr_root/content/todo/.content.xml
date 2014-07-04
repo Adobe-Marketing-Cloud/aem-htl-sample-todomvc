@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Todo"
+        sling:resourceType="todo/components/page"
+        itemResourceType="todo/components/item"
+        labelClearCompleted="Clear completed ({0})"
+        labelCountOpen="\{0} item left"
+        labelNewItem="What needs to be done?"
+        labelSelectActive="Active"
+        labelSelectAll="All"
+        labelSelectCompleted="Completed"
+        labelToggleAll="Mark all as complete">
+        <item1
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Todo 1"
+            sling:resourceType="todo/components/item"
+            completed="{Boolean}true"/>
+        <item2
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Todo 2 !"
+            sling:resourceType="todo/components/item"/>
+        <item3
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Todo 3"
+            sling:resourceType="todo/components/item"/>
+    </jcr:content>
+</jcr:root>

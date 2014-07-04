@@ -1,0 +1,5 @@
+<input id="toggle-all" type="checkbox">
+<label for="toggle-all">${properties.labelToggleAll}</label>
+<ul id="todo-list" data-sly-list="${resource.listChildren}">
+    <output data-sly-resource="${item.name}" data-sly-unwrap/>
+</ul>

@@ -3,18 +3,16 @@
 <properties>
 <comment>FileVault Package Properties</comment>
 <entry key="createdBy">admin</entry>
-<entry key="name">todomvcapp</entry>
-<entry key="lastModified">2014-04-09T12:48:13.510+02:00</entry>
+<entry key="name">TodoMVC</entry>
+<entry key="lastModified">2014-07-02T00:52:18.139+02:00</entry>
 <entry key="lastModifiedBy">admin</entry>
-<entry key="requiresRestart">false</entry>
-<entry key="created">2014-04-09T12:48:13.551+02:00</entry>
-<entry key="buildCount">2</entry>
+<entry key="created">2014-07-02T00:52:18.210+02:00</entry>
+<entry key="buildCount">1</entry>
 <entry key="version"/>
-<entry key="requiresRoot">false</entry>
 <entry key="dependencies"/>
 <entry key="packageFormatVersion">2</entry>
 <entry key="description"/>
+<entry key="lastWrapped">2014-07-02T00:52:18.139+02:00</entry>
 <entry key="group">sightly</entry>
-<entry key="lastWrapped">2014-04-09T12:48:13.510+02:00</entry>
 <entry key="lastWrappedBy">admin</entry>
 </properties>
