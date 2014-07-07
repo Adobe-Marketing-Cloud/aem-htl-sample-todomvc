@@ -7,22 +7,22 @@
         sling:resourceType="todo/components/page"
         itemResourceType="todo/components/item"
         labelClearCompleted="Clear completed ({0})"
-        labelCountOpen="\{0} item left"
+        labelCountActive="&lt;strong&gt;{0}&lt;/strong&gt; item left"
         labelNewItem="What needs to be done?"
         labelSelectActive="Active"
         labelSelectAll="All"
         labelSelectCompleted="Completed"
         labelToggleAll="Mark all as complete">
-        <item1
+        <todo_1
             jcr:primaryType="nt:unstructured"
             jcr:title="Todo 1"
             sling:resourceType="todo/components/item"
             completed="{Boolean}true"/>
-        <item2
+        <todo_2
             jcr:primaryType="nt:unstructured"
-            jcr:title="Todo 2 !"
+            jcr:title="Todo 2"
             sling:resourceType="todo/components/item"/>
-        <item3
+        <todo_3
             jcr:primaryType="nt:unstructured"
             jcr:title="Todo 3"
             sling:resourceType="todo/components/item"/>

@@ -20,14 +20,15 @@
 
 /*global use, granite */
 
-use(["/libs/sightly/js/3rd-party/q.js"], function (Q) {
+use(['/libs/sightly/js/3rd-party/q.js'], function (Q) {
 
     'use strict';
 
     var defer = Q.defer();
 
-    var count = {
-        open: 0,
+    var items = {
+        count: 0,
+        active: 0,
         completed: 0
     };
 
@@ -35,14 +36,15 @@ use(["/libs/sightly/js/3rd-party/q.js"], function (Q) {
         var i, l;
 
         for (i = 0, l = children.length; i < l; i += 1) {
+            items.count += 1;
             if (children[i].properties.completed == true) {
-                count.completed += 1;
+                items.completed += 1;
             } else {
-                count.open += 1;
+                items.active += 1;
             }
         }
 
-        defer.resolve(count);
+        defer.resolve(items);
     });
     
     return defer.promise;

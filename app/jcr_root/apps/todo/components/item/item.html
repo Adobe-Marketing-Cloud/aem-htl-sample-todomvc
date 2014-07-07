@@ -1,4 +1,4 @@
-<li class="${properties.completed ? 'completed': ''}" data-item-path="${resource.path @ context='uri'}">
+<li class="${properties.completed && 'completed'}" data-item-path="${resource.path @ context='uri'}">
     <div class="view">
         <input class="toggle" type="checkbox" checked="${properties.completed}">
         <label>${properties.jcr:title}</label>

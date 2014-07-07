@@ -4,31 +4,26 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>${properties.jcr:title}</title>
-        <output data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap>
+        <output data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap/>
 	</head>
 
 	<body>
 		<section id="todoapp"
-                 data-main-path="${currentPage.path @ context='uri'}.main.html"
-                 data-footer-path="${currentPage.path @ context='uri'}.footer.html"
-                 data-item-path="${resource.path @ context='uri'}"
-                 data-item-resource-type="${properties.itemResourceType @ context='uri'}">
+                 data-page-path="${currentPage.path @ context='uri'}.items.html"
+                 data-items-path="${resource.path @ context='uri'}/*"
+                 data-items-type="${properties.itemResourceType @ context='uri'}">
             
 			<header id="header">
                 <h1>${properties.jcr:title}</h1>
                 <input id="new-todo" placeholder="${properties.labelNewItem}" autofocus>
             </header>
 
-			<!--/* This section should be hidden by default and shown when there are todos */-->
-			<section id="main" data-sly-include="main.html"></section>
-
-			<!--/* This footer should hidden by default and shown when there are todos */-->
-			<footer id="footer" data-sly-include="footer.html"></footer>
+            <div id="items" data-sly-include="items.html"></div>
 		</section>
 
 		<footer id="info">
 			<p>${'Double-click to edit a todo' @ i18n}</p>
-			<p><a href="http://twitter.com/gabrielwalt">${'Created by Gabriel Walt' @ i18n}</a></p>
+			<p><a href="http://twitter.com/sightlyio">${'Featuring Sightly' @ i18n}</a></p>
 			<p><a href="http://todomvc.com">${'Part of TodoMVC' @ i18n}</a></p>
 		</footer>
 

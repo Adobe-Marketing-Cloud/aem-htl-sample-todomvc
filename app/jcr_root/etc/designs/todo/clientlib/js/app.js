@@ -21,25 +21,20 @@
 /*global jQuery, console */
 
 (function ($) {
-	'use strict';
+    'use strict';
 
-    var todoapp = $('#todoapp');
-    var mainPath         = todoapp.data('main-path');
-    var footerPath       = todoapp.data('footer-path');
-    var itemPath         = todoapp.data('item-path') + '/*';
-    var itemResourceType = todoapp.data('item-resource-type');
+    // Variables global to this script
+    var todoapp   = $('#todoapp');
+    var pagePath  = todoapp.data('page-path');
+    var itemsPath = todoapp.data('items-path');
+    var itemsType = todoapp.data('items-type');
 
     /**
      * Generic function to do a sling post and refresh the view
      */
     function updateServerItem(path, data) {
         $.post(path, data).done(function (e) {
-            $.get(mainPath, function (data) {
-                $('#main').html(data);
-            });
-            $.get(footerPath, function (data) {
-                $('#footer').html(data);
-            });
+            $('#items').load(pagePath);
         });
     }
 
@@ -50,8 +45,8 @@
         if (event.which === 13) {
             var input = $(this);
             var value = input.val();
-            updateServerItem(itemPath, { 'jcr:title': value, '_charset_': 'utf-8', 'sling:resourceType' : itemResourceType });
             input.val('');
+            updateServerItem(itemsPath, { 'jcr:title': value, '_charset_': 'utf-8', 'sling:resourceType' : itemsType });
         }
     }
     
@@ -59,21 +54,23 @@
      * Toggle the view, show textbox or label
      */
     function editItem(event) {
-        var view  = $(this).hide();
-        var input = view.parent().find('.edit').show().focus();
+        var item  = $(this).closest('li');
+        var view  = item.find('.view').hide();
+        var input = item.find('.edit').show().focus();
     }
     
     /**
-     * Display a single list item
+     * Submit updated item title and toggle the view to show the item
      */
-    function displayItem(event) {
+    function updateItem(event) {
         var input = $(this);
         if (input.is(':visible') && (event.type !== 'keypress' || event.which === 13)) {
-            var item  = input.hide().parent();
-            var view  = item.find('.view').show();
             var value = input.val();
+            var item  = input.hide().closest('li');
             var path  = item.data('item-path');
-            view.find('label').text(value);
+            item
+                .find('.view').show()
+                .find('label').text(value);
             updateServerItem(path, { 'jcr:title': value, '_charset_': 'utf-8' });
         }
     }
@@ -98,10 +95,12 @@
         var path      = item.data('item-path');
         updateServerItem(path, { 'completed': completed, 'completed@TypeHint': 'Boolean' });
     }
-    
+
+    // Attaching all events using delegation
     todoapp.on('keypress', '#new-todo', addItem);
-    todoapp.on('dblclick', '.view', editItem);
-    todoapp.on('blur keypress', '.edit', displayItem);
+    todoapp.on('dblclick', '.view label', editItem);
+    todoapp.on('blur keypress', '.edit', updateItem);
     todoapp.on('click', '.destroy', destroyItem);
     todoapp.on('click', '.toggle', toggleItem);
+
 })(jQuery);
