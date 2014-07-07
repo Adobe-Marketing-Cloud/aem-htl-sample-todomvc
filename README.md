@@ -1,6 +1,6 @@
 # Sightly TodoMVC Example
 
-This sample shows how to build components in AEM 6 with Sightly. It is an AEM implementation of the famous [TodoMVC Team](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be persisted on the server using AEM's underlying REST framework (Apache Sling).
+This sample shows how to build components in AEM 6 with Sightly. It's an implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
 
 ## Learning Sightly
 
