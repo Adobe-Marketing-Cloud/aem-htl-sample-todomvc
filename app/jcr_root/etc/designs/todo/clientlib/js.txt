@@ -1,4 +1,3 @@
 #base=js
-base.js
 jquery.js
 app.js
