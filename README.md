@@ -33,15 +33,15 @@ Note that [Java](http://docs.adobe.com/docs/en/aem/6-0/develop/sightly/use-api-i
 
 The nodes located in the content repository at `/content/todo` are serialized in a [`.content.xml`](app/jcr_root/content/todo/.content.xml) file with following content:
 
-* `jcr:content` The content node for the todo page. It contains the title and various labels that are to be displayed on the page, but important is the `sling:resourceType` property, which makes this node rendered by the [`page`](app/jcr_root/apps/todo/components/page) component.
-  * `todo_<N>` The todo items with their titles and completed status. As the `sling:resourceType` property defines it, they are rendered by the [`item`](app/jcr_root/apps/todo/components/item) component.
+* [`jcr:content`](app/jcr_root/content/todo/.content.xml#L4-L15) The content node for the todo page. It contains the title and various labels that are to be displayed on the page, but important is the `sling:resourceType` property, which makes this node rendered by the [`page`](app/jcr_root/apps/todo/components/page) component.
+  * [`todo_<N>`](app/jcr_root/content/todo/.content.xml#L16-L20) The todo items with their titles and completed status. As the `sling:resourceType` property defines it, they are rendered by the [`item`](app/jcr_root/apps/todo/components/item) component.
 
 #### Server-side components
 
 [AEM components](http://dev.day.com/docs/en/cq/current/developing/components.html) render individual content nodes based on their `sling:resourceType` properties.
 
 * [`page`](app/jcr_root/apps/todo/components/page)
-  Renders the page content node (like `/content/todo/jcr:content`).
+  Renders the page content node.
   * [`page.html`](app/jcr_root/apps/todo/components/page/page.html)
     **Entry point:** The outer page markup that doesn't change when actions are performed.
   * [`page.js`](app/jcr_root/apps/todo/components/page/page.js)
@@ -51,7 +51,7 @@ The nodes located in the content repository at `/content/todo` are serialized in
   * [`todoapp.js`](app/jcr_root/apps/todo/components/page/todoapp.js)
     Server-side script that prepares the data model needed by `todoapp.html`; also defines the data attributes that will instruct the front-end POST requests.
 * [`item`](app/jcr_root/apps/todo/components/item)
-  Renders the todo item content nodes (like `/content/todo/jcr:content/todo_1`).
+  Renders the todo item content nodes.
   * [`item.html`](app/jcr_root/apps/todo/components/item/item.html)
     Renders the markup for the items.
   * [`item.js`](app/jcr_root/apps/todo/components/item/item.js)
@@ -70,10 +70,10 @@ The nodes located in the content repository at `/content/todo` are serialized in
     Lists the oder in which to load the CSS files.
   * [`js.txt`](app/jcr_root/etc/designs/todo/clientlib/js.txt)
     Lists the oder in which to load the JS files.
-  * `css`
+  * [`css`](app/jcr_root/etc/designs/todo/clientlib/css)
     * [`base.css`](app/jcr_root/etc/designs/todo/clientlib/css/base.css)
       The style base provided by the [TodoMVC template](https://github.com/tastejs/todomvc/tree/gh-pages/template).
-  * `js`
+  * [`js`](app/jcr_root/etc/designs/todo/clientlib/js)
     * [`jquery.js`](app/jcr_root/etc/designs/todo/clientlib/js/jquery.js)
       For convenience of writing concise JS...
     * [`app.js`](app/jcr_root/etc/designs/todo/clientlib/js/app.js)
