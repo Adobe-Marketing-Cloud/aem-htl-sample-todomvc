@@ -18,23 +18,39 @@
  * the license terms contained in the corresponding files. 
  */
 
-/*global jQuery, console */
-
 (function ($) {
     'use strict';
-
+    
     // Variables global to this script
-    var todoapp   = $('#todoapp');
-    var pagePath  = todoapp.data('page-path');
-    var itemsPath = todoapp.data('items-path');
-    var itemsType = todoapp.data('items-type');
+    var todoapp = $('#todoapp');
+    var key = {
+        enter: 13,
+        escape: 27
+    };
 
     /**
-     * Generic function to do a sling post and refresh the view
+     * Generic function that POSTs some action to the server and subsequently updates the view.
+     * It takes the path and payload data attributes of the element and builds an
+     * asynchronous POST request with it. Optionally, a value can be provided, which will
+     * be integrated into the payload. Once the POST is done, it refreshes the view with
+     * an asynchronous GET request.
      */
-    function updateServerItem(path, data) {
-        $.post(path, data).done(function (e) {
-            $('#items').load(pagePath);
+    function performAction(element, value) {
+        // One line of magic to retreive the right element, depending on how the function was called
+        element = (element instanceof $) ? element : $(element.target || element);
+        
+        var path = element.data('path');
+        var payload = element.data('payload');
+        var payloadInput = element.data('payload-input');
+        
+        // If a value was provided and there is a payload-input data attribute, add that to the payload
+        if (payloadInput && value !== undefined) {
+            payload[payloadInput] = value;
+        }
+        
+        // Do the post and subsequently update the view
+        $.post(path, payload).done(function () {
+            todoapp.load(todoapp.data('update-path'));
         });
     }
 
@@ -42,21 +58,22 @@
      * Add a new todo item using sling default post servlet
      */
     function addItem(event) {
-        if (event.which === 13) {
+        if (event.which === key.enter) {
             var input = $(this);
-            var value = input.val();
-            input.val('');
-            updateServerItem(itemsPath, { 'jcr:title': value, '_charset_': 'utf-8', 'sling:resourceType' : itemsType });
+            var value = input.val().trim();
+            
+            // Only create the item if the input value is not empty
+            if (value.length) {
+                performAction(input, value);
+            }
         }
     }
     
     /**
      * Toggle the view, show textbox or label
      */
-    function editItem(event) {
-        var item  = $(this).closest('li');
-        var view  = item.find('.view').hide();
-        var input = item.find('.edit').show().focus();
+    function editItem() {
+        $(this).closest('li').addClass('editing').find('.edit').focus();
     }
     
     /**
@@ -64,43 +81,48 @@
      */
     function updateItem(event) {
         var input = $(this);
-        if (input.is(':visible') && (event.type !== 'keypress' || event.which === 13)) {
-            var value = input.val();
-            var item  = input.hide().closest('li');
-            var path  = item.data('item-path');
-            item
-                .find('.view').show()
-                .find('label').text(value);
-            updateServerItem(path, { 'jcr:title': value, '_charset_': 'utf-8' });
+        var item = input.closest('li.editing');
+        
+        if (item.length && (event.type !== 'keyup' || event.which === key.enter || event.which === key.ecape)) {
+            if (event.which !== key.ecape) {
+                // If escape wasn't pressed, submit changes
+                var value = input.val().trim();
+                
+                //item.removeClass('editing').find('label').text(input.val());
+                if (value.length) {
+                    // Only save if the value is not empty
+                    performAction(input, value);
+                } else {
+                    // If the value is empty, remove the item
+                    item.find('.destroy').trigger('click');
+                }
+            } else {
+                // If escape was pressed, reset everything
+                item.removeClass('editing');
+                input.val(item.find('label').text());
+            }
         }
-    }
-
-    /**
-     * Remove a todo item
-     */
-    function destroyItem() {
-        var toggle = $(this);
-        var item   = toggle.closest('[data-item-path]');
-        var path   = item.data('item-path');
-        updateServerItem(path, { ':operation' : 'delete' });
     }
 
     /**
      * Complete/reopen a todo item
      */
     function toggleItem() {
-        var toggle    = $(this);
-        var item      = toggle.closest('[data-item-path]');
-        var completed = toggle.is(':checked');
-        var path      = item.data('item-path');
-        updateServerItem(path, { 'completed': completed, 'completed@TypeHint': 'Boolean' });
+        var input = $(this);
+        
+        performAction(input, input.is(':checked'));
     }
+    
+    // For the multiple ':applyTo' parameters to not be transformed into ':applyTo[]' upon POST, this has to be disabled
+    $.ajaxSettings.traditional = true;
 
     // Attaching all events using delegation
-    todoapp.on('keypress', '#new-todo', addItem);
+    todoapp.on('keyup', '#new-todo', addItem);
     todoapp.on('dblclick', '.view label', editItem);
-    todoapp.on('blur keypress', '.edit', updateItem);
-    todoapp.on('click', '.destroy', destroyItem);
-    todoapp.on('click', '.toggle', toggleItem);
+    todoapp.on('blur keyup', '.edit', updateItem);
+    todoapp.on('click', '.destroy', performAction);
+    todoapp.on('change', '.toggle', toggleItem);
+    todoapp.on('change', '#toggle-all', performAction);
+    todoapp.on('click', '#clear-completed', performAction);
 
 })(jQuery);

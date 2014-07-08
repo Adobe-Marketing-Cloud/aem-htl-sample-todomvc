@@ -18,35 +18,12 @@
  * the license terms contained in the corresponding files. 
  */
 
-/*global use, granite */
-
-use(['/libs/sightly/js/3rd-party/q.js'], function (Q) {
-
+use('/apps/todo/components/utils/filters.js', function (filters) {
     'use strict';
 
-    var defer = Q.defer();
-
-    var items = {
-        count: 0,
-        active: 0,
-        completed: 0
-    };
-
-    granite.resource.getChildren().then(function (children) {
-        var i, l;
-
-        for (i = 0, l = children.length; i < l; i += 1) {
-            items.count += 1;
-            if (children[i].properties.completed == true) {
-                items.completed += 1;
-            } else {
-                items.active += 1;
-            }
-        }
-
-        defer.resolve(items);
-    });
+    var filterSelector = filters.selector ? '.' + filters.selector : '';
     
-    return defer.promise;
-
+    return {
+        updatePath: currentPage.getPath() + '.todoapp' + filterSelector + '.html'
+    };
 });

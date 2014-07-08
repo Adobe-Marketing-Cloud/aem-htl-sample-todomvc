@@ -7,7 +7,7 @@
         sling:resourceType="todo/components/page"
         itemResourceType="todo/components/item"
         labelClearCompleted="Clear completed ({0})"
-        labelCountActive="&lt;strong&gt;{0}&lt;/strong&gt; item left"
+        labelCountActive="&lt;strong&gt;{0}&lt;/strong&gt; item{1} left"
         labelNewItem="What needs to be done?"
         labelSelectActive="Active"
         labelSelectAll="All"

@@ -4,22 +4,11 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>${properties.jcr:title}</title>
-        <output data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap/>
+        <output data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap>
 	</head>
 
-	<body>
-		<section id="todoapp"
-                 data-page-path="${currentPage.path @ context='uri'}.items.html"
-                 data-items-path="${resource.path @ context='uri'}/*"
-                 data-items-type="${properties.itemResourceType @ context='uri'}">
-            
-			<header id="header">
-                <h1>${properties.jcr:title}</h1>
-                <input id="new-todo" placeholder="${properties.labelNewItem}" autofocus>
-            </header>
-
-            <div id="items" data-sly-include="items.html"></div>
-		</section>
+	<body data-sly-use.model="page.js">
+		<section id="todoapp" data-update-path="${model.updatePath}" data-sly-include="todoapp.html"></section>
 
 		<footer id="info">
 			<p>${'Double-click to edit a todo' @ i18n}</p>
