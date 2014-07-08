@@ -45,17 +45,17 @@ The nodes located in the content repository at `/content/todo` are serialized in
   * [`page.html`](app/jcr_root/apps/todo/components/page/page.html)
     **Entry point:** The outer page markup that doesn't change when actions are performed.
   * [`page.js`](app/jcr_root/apps/todo/components/page/page.js)
-    Server-side script that prepares the data model needed by `page.html`.
+    Server-side script that prepares additional data model needed by `page.html`.
   * [`todoapp.html`](app/jcr_root/apps/todo/components/page/todoapp.html)
     Renders the list of todo items. **Called** directly when fetching what changed in the view.
   * [`todoapp.js`](app/jcr_root/apps/todo/components/page/todoapp.js)
-    Server-side script that prepares the data model needed by `todoapp.html`; also defines the data attributes that will instruct the front-end POST requests.
+    Server-side script that prepares additional data model needed by `todoapp.html`; also defines the data attributes that will instruct the front-end POST requests.
 * [`item`](app/jcr_root/apps/todo/components/item)
   Renders the todo item content nodes.
   * [`item.html`](app/jcr_root/apps/todo/components/item/item.html)
     Renders the markup for the items.
   * [`item.js`](app/jcr_root/apps/todo/components/item/item.js)
-    Server-side script that prepares the data model needed by `item.html`; also defines the data attributes that will instruct the front-end POST requests.
+    Server-side script that prepares additional data model needed by `item.html`; also defines the data attributes that will instruct the front-end POST requests.
 * [`utils`](app/jcr_root/apps/todo/components/utils)
   Collection of reusable scripts.
   * [`filters.js`](app/jcr_root/apps/todo/components/utils/filters.js)
