@@ -18,10 +18,14 @@
  * the license terms contained in the corresponding files. 
  */
 
+/**
+ * Returns an object with following member:
+ * {String} updatePath: The URL on which the web app can retreive an HTML fragment to update the view
+ */
 use('/apps/todo/components/utils/filters.js', function (filters) {
     'use strict';
 
-    var filterSelector = filters.selector ? '.' + filters.selector : '';
+    var filterSelector = filters.isAll ? '' : ('.' + filters.selector);
     
     return {
         updatePath: currentPage.getPath() + '.todoapp' + filterSelector + '.html'

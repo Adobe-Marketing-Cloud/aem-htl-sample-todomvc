@@ -18,13 +18,26 @@
  * the license terms contained in the corresponding files. 
  */
 
+/**
+ * Returns a promise that gets resolved with an object that has following members:
+ * {String} selector: The 'active' or 'completed' selector of the request URL
+ * {Boolean} isAll: True when showing all items
+ * {Boolean} isActive: True when filtering for active items only
+ * {Boolean} isCompleted: True when filtering for active items only
+ * {Array} allItems: Resource paths of all todo items
+ * {Array} completedItems: Resource paths of the completed items
+ * {Array} activeItems: Resource paths of the active items
+ * {Object} addItemAttributes: Data attributes to do the POST for adding new todo items
+ * {Object} toggleAllAttributes: Data attributes to do the POST for completing/reopening all todo items
+ * {Object} destroyCompletedAttributes: Data attributes to do the POST for removing all completed todo items
+ */
 use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'], function (Q, model) {
     'use strict';
 
     var defer = Q.defer();
 
     /**
-     * Returns the POST path and payload to add a new todo
+     * Data attributes to do the POST for adding new todo items
      */
     function addItemAttributes() {
         return {
@@ -33,12 +46,13 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
                 'sling:resourceType': properties.get('itemResourceType', '') + '', // The concatenation makes Rhino convert to JS String
                 '_charset_': 'utf-8'
             }),
-            'data-payload-input': 'jcr:title' // The key of the payload value that has to be added
+            // The key of the payload value that has to be added
+            'data-payload-input': 'jcr:title'
         };
     }
 
     /**
-     * Returns the POST path and payload to complete/reopen all todo items
+     * Data attributes to do the POST for completing/reopening all todo items
      */
     function toggleAllAttributes(activeItems, completedItems) {
         var payload = {};
@@ -59,7 +73,7 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
     }
 
     /**
-     * Returns the POST path and payload to remove a todo all completed items
+     * Data attributes to do the POST for removing all completed todo items
      */
     function destroyCompletedAttributes(completedItems) {
         return {
@@ -73,10 +87,12 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
 
     // We need to retrieve the todo items first, which are the children of the page
     granite.resource.getChildren().then(function (children) {
+        // Convenient list of paths to the various todo items
         model.allItems = [];
         model.completedItems = [];
         model.activeItems = [];
 
+        // Let's fill the above arrays
         for (var i = 0, l = children.length; i < l; i += 1) {
             var path = children[i].path;
             
@@ -89,17 +105,15 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
             }
         }
 
+        // The data attributes to do the various POST actions
         model.addItemAttributes = addItemAttributes();
         model.toggleAllAttributes = toggleAllAttributes(model.activeItems, model.completedItems);
         model.destroyCompletedAttributes = destroyCompletedAttributes(model.completedItems);
 
-        // Contains an 's' for e.g. in english when there are multiple active items
-        // TODO: this should be internationalized more seriously
-        model.pluralizeActive = (model.activeItems.length !== 1) ? 's' : '';
-
+        // This will resolve the promise and make the model object available in the todoapp.html view
         defer.resolve(model);
     });
 
-    // Since getting the page children is an async call, we return a promise
+    // Since getting the page children is an async call, we have to return a promise
     return defer.promise;
 });

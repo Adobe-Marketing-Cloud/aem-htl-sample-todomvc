@@ -2,13 +2,22 @@
 
 This example shows how to build components in [AEM 6](http://www.adobe.com/go/aem) with Sightly. It's a feature-complete implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
 
-All of this below 300 lines of clean (JavaScript) code, following the AEM best practice!
+All of in just about 300 lines of clean server- and client-side JavaScript code (not counting jQuery, nor the copyright headers), following the latest AEM best practice!
 
 ## Learning Sightly
 
 Sightly is the new HTML templating system, introduced with AEM 6.0. It takes the place of JSP (Java Server Pages) and ESP (ECMAScript Server Pages) as the preferred HTML templating system for AEM.
 
 The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-0/develop/sightly.html) is a great resource for getting started.
+
+You can also read following blog posts:
+
+* [Sightly intro part 1](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/01/sightly-preview-part1.html)
+* [Sightly intro part 2](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/01/sightly-preview-part2.html)
+* [Sightly intro part 3](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/03/sightly-intro-part3.html)
+* [Sightly intro part 4](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/04/sightly-intro-part-4.html)
+* [Sightly intro part 5: FAQ](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/05/sightly-intro-part-5-faq.html)
+* [Sightly and Clientlibs](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/06/sightly-and-clientlibs.html)
 
 Get help from other Sightly users:
 
@@ -84,8 +93,10 @@ The nodes located in the content repository at `/content/todo` are serialized in
 ## Running it
 
 * **Create package**
-  * Create a ZIP file from the `apps` folder, for e.g. in a Unix shell you can do:  
-    `cd apps`  
+  * Get the code from this Git repository, for e.g. with following command line:  
+    `git clone https://github.com/Adobe-Marketing-Cloud/aem-sample-sightly-todomvc.git`
+  * Create a ZIP file from the `app` folder, for e.g. in a Unix shell you can do:  
+    `cd aem-sample-sightly-todomvc/app`  
     `zip TodoMVC.zip -r jcr_root META-INF`
 * **Start AEM**
   * Double-click on the AEM JAR to start an instance if you haven't done that already.

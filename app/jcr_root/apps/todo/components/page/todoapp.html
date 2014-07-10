@@ -13,7 +13,7 @@
 
 <footer id="footer" data-sly-test="${model.allItems}">
     <span id="todo-count">
-        ${properties.labelCountActive @ format=[model.activeItems.length, model.pluralizeActive], context='html'}
+        ${((model.activeItems.length == 1) ? properties.labelCountActive : properties.labelCountActivePlural) @ format=model.activeItems.length, context='html'}
     </span>
 
     <ul id="filters">

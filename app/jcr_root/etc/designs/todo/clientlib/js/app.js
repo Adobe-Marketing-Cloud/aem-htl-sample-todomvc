@@ -39,18 +39,19 @@
         // One line of magic to retreive the right element, depending on how the function was called
         element = (element instanceof $) ? element : $(element.target || element);
         
+        var updatePath = todoapp.data('update-path');
         var path = element.data('path');
         var payload = element.data('payload');
         var payloadInput = element.data('payload-input');
         
-        // If a value was provided and there is a payload-input data attribute, add that to the payload
+        // Add the value to the payload if it was provided and if there is a data-payload-input attribute
         if (payloadInput && value !== undefined) {
             payload[payloadInput] = value;
         }
         
         // Do the post and subsequently update the view
         $.post(path, payload).done(function () {
-            todoapp.load(todoapp.data('update-path'));
+            todoapp.load(updatePath);
         });
     }
 
@@ -81,23 +82,28 @@
      */
     function updateItem(event) {
         var input = $(this);
-        var item = input.closest('li.editing');
+        var item = input.closest('li');
         
-        if (item.length && (event.type !== 'keyup' || event.which === key.enter || event.which === key.ecape)) {
-            if (event.which !== key.ecape) {
-                // If escape wasn't pressed, submit changes
+        // Check that the item hasn't already been edited, because this method can be
+        // called twice: once for hitting the enter key and once for the lost focus
+        if (item.hasClass('editing')) {
+
+            // Submit changes if focused out of input or if enter was pressed
+            if (event.type === 'focusout' || event.which === key.enter) {
                 var value = input.val().trim();
-                
-                //item.removeClass('editing').find('label').text(input.val());
+
+                item.removeClass('editing').find('label').text(value);
+
+                // Only save if the value is not empty
                 if (value.length) {
-                    // Only save if the value is not empty
                     performAction(input, value);
+                // Remove the item if the value was left empty
                 } else {
-                    // If the value is empty, remove the item
                     item.find('.destroy').trigger('click');
                 }
-            } else {
-                // If escape was pressed, reset everything
+
+            // If escape was pressed, reset everything
+            } else if (event.which === key.escape) {
                 item.removeClass('editing');
                 input.val(item.find('label').text());
             }
@@ -119,7 +125,7 @@
     // Attaching all events using delegation
     todoapp.on('keyup', '#new-todo', addItem);
     todoapp.on('dblclick', '.view label', editItem);
-    todoapp.on('blur keyup', '.edit', updateItem);
+    todoapp.on('focusout keyup', '.edit', updateItem);
     todoapp.on('click', '.destroy', performAction);
     todoapp.on('change', '.toggle', toggleItem);
     todoapp.on('change', '#toggle-all', performAction);

@@ -18,6 +18,13 @@
  * the license terms contained in the corresponding files. 
  */
 
+/**
+ * Returns an object with following members:
+ * {Boolean} show: True when the item is to be displayed (i.e. the all/active/completed filters include it)
+ * {Object} updateItemAttributes: Data attributes to do the POST for editing the text of the item
+ * {Object} destroyItemAttributes: Data attributes to do the POST for removing the item
+ * {Object} toggleItemAttributes: Data attributes to do the POST for marking the item as complete or active
+ */
 use('/apps/todo/components/utils/filters.js', function (filters) {
     'use strict';
     
@@ -25,7 +32,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
     var path = resource.getPath();
 
     /**
-     * Returns the POST path and payload to add a new todo
+     * Data attributes to do the POST for editing the text of the item
      */
     function updateItemAttributes() {
         return {
@@ -33,12 +40,13 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
             'data-payload': JSON.stringify({
                 '_charset_': 'utf-8'
             }),
-            'data-payload-input': 'jcr:title' // The key of the payload value that has to be added
+            // The key of the payload value that has to be added
+            'data-payload-input': 'jcr:title'
         };
     }
 
     /**
-     * Returns the POST path and payload to add a new todo
+     * Data attributes to do the POST for removing the item
      */
     function destroyItemAttributes() {
         return {
@@ -50,7 +58,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
     }
 
     /**
-     * Returns the POST path and payload to add a new todo
+     * Data attributes to do the POST for marking the item as complete or active
      */
     function toggleItemAttributes() {
         return {
@@ -58,7 +66,8 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
             'data-payload': JSON.stringify({
                 'completed@TypeHint': 'Boolean'
             }),
-            'data-payload-input': 'completed' // The key of the payload value that has to be added
+            // The key of the payload value that has to be added
+            'data-payload-input': 'completed'
         };
     }
 
@@ -66,11 +75,14 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
     model.show = filters.isAll || (filters.isCompleted == properties.get('completed', false)) // jshint ignore:line
 
     if (model.show) {
+        // The data attributes to do the various POST actions
         model.updateItemAttributes = updateItemAttributes();
         model.destroyItemAttributes = destroyItemAttributes();
         model.toggleItemAttributes = toggleItemAttributes();
         
-        // Temporary hack to workaround the data-sly-attribute class bug
+        // Unfortunate ugly hack to workaround the data-sly-attribute class bug:
+        // When using data-sly-attribute to set multiple attributes at once, it removes
+        // the class attribute on the element if it isn't set in the provided object.
         model.updateItemAttributes['class'] = 'edit';
         model.destroyItemAttributes['class'] = 'destroy';
         model.toggleItemAttributes['class'] = 'toggle';

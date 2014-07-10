@@ -18,6 +18,13 @@
  * the license terms contained in the corresponding files. 
  */
 
+/**
+ * Returns an object with following members:
+ * {String} selector: The 'active' or 'completed' selector of the request URL
+ * {Boolean} isAll: True when showing all items
+ * {Boolean} isActive: True when filtering for active items only
+ * {Boolean} isCompleted: True when filtering for active items only
+ */
 use(function () {
     'use strict';
 
@@ -45,7 +52,7 @@ use(function () {
 
     return {
         selector: selector,
-        isAll: !selector,
+        isAll: selector === '',
         isActive: selector === 'active',
         isCompleted: selector === 'completed'
     };
