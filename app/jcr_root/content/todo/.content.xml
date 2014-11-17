@@ -2,6 +2,8 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:lastModified="{Date}2014-11-17T00:33:50.395-07:00"
+        cq:lastModifiedBy="admin"
         jcr:primaryType="cq:PageContent"
         jcr:title="Todo"
         sling:resourceType="todo/components/page"
@@ -14,18 +16,14 @@
         labelSelectAll="All"
         labelSelectCompleted="Completed"
         labelToggleAll="Mark all as complete">
-        <todo_1
+        <create_a_todomvc_tem
             jcr:primaryType="nt:unstructured"
-            jcr:title="Todo 1"
+            jcr:title="Create a TodoMVC template"
             sling:resourceType="todo/components/item"
             completed="{Boolean}true"/>
-        <todo_2
+        <rule_the_web
             jcr:primaryType="nt:unstructured"
-            jcr:title="Todo 2"
-            sling:resourceType="todo/components/item"/>
-        <todo_3
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Todo 3"
+            jcr:title="Rule the web"
             sling:resourceType="todo/components/item"/>
     </jcr:content>
 </jcr:root>
