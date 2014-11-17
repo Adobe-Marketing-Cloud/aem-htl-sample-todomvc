@@ -21,71 +21,64 @@
 /**
  * Returns an object with following members:
  * {Boolean} show: True when the item is to be displayed (i.e. the all/active/completed filters include it)
- * {Object} updateItemAttributes: Data attributes to do the POST for editing the text of the item
- * {Object} destroyItemAttributes: Data attributes to do the POST for removing the item
- * {Object} toggleItemAttributes: Data attributes to do the POST for marking the item as complete or active
+ * {Object} updateItemAction: Creates the JSON that describes the POST action for editing the text of the item
+ * {Object} destroyItemAction: Creates the JSON that describes the POST action for removing the item
+ * {Object} toggleItemAction: Creates the JSON that describes the POST action for marking the item as complete or active
  */
 use('/apps/todo/components/utils/filters.js', function (filters) {
     'use strict';
     
     var model = {};
-    var path = resource.getPath();
 
     /**
-     * Data attributes to do the POST for editing the text of the item
+     * Generates JSON for the POST action to edit the text of the item.
      */
-    function updateItemAttributes() {
-        return {
-            'data-path': path,
-            'data-payload': JSON.stringify({
+    function updateItemAction() {
+        return JSON.stringify({
+            path: String(granite.resource.path),
+            data: {
                 '_charset_': 'utf-8'
-            }),
-            // The key of the payload value that has to be added
-            'data-payload-input': 'jcr:title'
-        };
+            },
+            // The key of the payload value that has to be added.
+            append: 'jcr:title'
+        });
     }
 
     /**
-     * Data attributes to do the POST for removing the item
+     * Generates the JSON for the POST action to remove the item.
      */
-    function destroyItemAttributes() {
-        return {
-            'data-path': path,
-            'data-payload': JSON.stringify({
+    function destroyItemAction() {
+        return JSON.stringify({
+            path: String(granite.resource.path),
+            data: {
                 ':operation': 'delete'
-            })
-        };
+            }
+        });
     }
 
     /**
-     * Data attributes to do the POST for marking the item as complete or active
+     * Generates the JSON for the POST action to mark the item as complete or active.
      */
-    function toggleItemAttributes() {
-        return {
-            'data-path': path,
-            'data-payload': JSON.stringify({
+    function toggleItemAction() {
+        return JSON.stringify({
+            path: String(granite.resource.path),
+            data: {
                 'completed@TypeHint': 'Boolean'
-            }),
+            },
             // The key of the payload value that has to be added
-            'data-payload-input': 'completed'
-        };
+            append: 'completed'
+        });
     }
 
-    // This non-strict comparison is on purpose for Rhino to do the expected
-    model.show = filters.isAll || (filters.isCompleted == properties.get('completed', false)) // jshint ignore:line
+    var isCompleted = ('completed' in granite.resource.properties) &&
+            (granite.resource.properties.completed === true || granite.resource.properties.completed.equals(true));
+    model.show = filters.isAll || (filters.isCompleted === isCompleted);
 
     if (model.show) {
-        // The data attributes to do the various POST actions
-        model.updateItemAttributes = updateItemAttributes();
-        model.destroyItemAttributes = destroyItemAttributes();
-        model.toggleItemAttributes = toggleItemAttributes();
-        
-        // Unfortunate ugly hack to workaround the data-sly-attribute class bug:
-        // When using data-sly-attribute to set multiple attributes at once, it removes
-        // the class attribute on the element if it isn't set in the provided object.
-        model.updateItemAttributes['class'] = 'edit';
-        model.destroyItemAttributes['class'] = 'destroy';
-        model.toggleItemAttributes['class'] = 'toggle';
+        // The JSON for the POST request of the various actions
+        model.updateItemAction = updateItemAction();
+        model.destroyItemAction = destroyItemAction();
+        model.toggleItemAction = toggleItemAction();
     }
 
     return model;

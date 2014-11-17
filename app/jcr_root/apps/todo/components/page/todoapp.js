@@ -27,9 +27,9 @@
  * {Array} allItems: Resource paths of all todo items
  * {Array} completedItems: Resource paths of the completed items
  * {Array} activeItems: Resource paths of the active items
- * {Object} addItemAttributes: Data attributes to do the POST for adding new todo items
- * {Object} toggleAllAttributes: Data attributes to do the POST for completing/reopening all todo items
- * {Object} destroyCompletedAttributes: Data attributes to do the POST for removing all completed todo items
+ * {Object} addItemAction: Creates the JSON that describes the POST action for adding new todo items
+ * {Object} toggleAllAction: Creates the JSON that describes the POST action for completing/reopening all todo items
+ * {Object} destroyCompletedAction: Creates the JSON that describes the POST action for removing all completed todo items
  */
 use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'], function (Q, model) {
     'use strict';
@@ -37,78 +37,78 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
     var defer = Q.defer();
 
     /**
-     * Data attributes to do the POST for adding new todo items
+     * Generates JSON for the POST action to add new todo items.
      */
-    function addItemAttributes() {
-        return {
-            'data-path': resource.getPath() + '/*',
-            'data-payload': JSON.stringify({
-                'sling:resourceType': properties.get('itemResourceType', '') + '', // The concatenation makes Rhino convert to JS String
+    function addItemAction() {
+        return JSON.stringify({
+            path: String(granite.resource.path) + '/*',
+            data: {
+                'sling:resourceType': String(granite.properties.itemResourceType),
                 '_charset_': 'utf-8'
-            }),
-            // The key of the payload value that has to be added
-            'data-payload-input': 'jcr:title'
-        };
+            },
+            // The key of the value to be added to the data payload.
+            append: 'jcr:title'
+        });
     }
 
     /**
-     * Data attributes to do the POST for completing/reopening all todo items
+     * Generates JSON flr the POST action to complete/reopen all todo items.
      */
-    function toggleAllAttributes(activeItems, completedItems) {
-        var payload = {};
+    function toggleAllAction(activeItems, completedItems) {
+        var data = {};
         var completed = (activeItems.length === 0);
         var toggleItems = completed ? completedItems : activeItems;
 
         for (var i = 0, l = toggleItems.length; i < l; i++) {
             var path = toggleItems[i];
-            payload[path + '/completed'] = !completed;
-            payload[path + '/completed@TypeHint'] = 'Boolean';
+            data[path + '/completed'] = !completed;
+            data[path + '/completed@TypeHint'] = 'Boolean';
         }
 
-        return {
-            'checked': completed,
-            'data-path': currentPage.getPath(),
-            'data-payload': JSON.stringify(payload)
-        };
+        return JSON.stringify({
+            path: String(wcm.currentPage.path),
+            data: data
+        });
     }
 
     /**
-     * Data attributes to do the POST for removing all completed todo items
+     * Generates JSON for the POST action to remove all completed todo items.
      */
-    function destroyCompletedAttributes(completedItems) {
-        return {
-            'data-path': currentPage.getPath(),
-            'data-payload': JSON.stringify({
+    function destroyCompletedAction(completedItems) {
+        return JSON.stringify({
+            path: String(wcm.currentPage.path),
+            data: {
                 ':operation': 'delete',
                 ':applyTo': completedItems
-            })
-        };
+            }
+        });
     }
 
-    // We need to retrieve the todo items first, which are the children of the page
+    // We need to retrieve the todo items first, which are the children of the page.
     granite.resource.getChildren().then(function (children) {
-        // Convenient list of paths to the various todo items
+        // Convenient list of paths to the various todo items.
         model.allItems = [];
         model.completedItems = [];
         model.activeItems = [];
 
-        // Let's fill the above arrays
+        // Let's fill the above arrays...
         for (var i = 0, l = children.length; i < l; i += 1) {
-            var path = children[i].path;
+            var child = children[i];
+            var path = child.path;
+            var isCompleted = ('completed' in child.properties) && child.properties.completed.equals(true);
             
             model.allItems.push(path);
-            // This non-strict comparison is on purpose for Rhino to do the expected
-            if (children[i].properties.completed == true) { // jshint ignore:line
+            if (isCompleted) {
                 model.completedItems.push(path);
             } else {
                 model.activeItems.push(path);
             }
         }
 
-        // The data attributes to do the various POST actions
-        model.addItemAttributes = addItemAttributes();
-        model.toggleAllAttributes = toggleAllAttributes(model.activeItems, model.completedItems);
-        model.destroyCompletedAttributes = destroyCompletedAttributes(model.completedItems);
+        // The JSON for the POST request of the various actions
+        model.addItemAction = addItemAction();
+        model.toggleAllAction = toggleAllAction(model.activeItems, model.completedItems);
+        model.destroyCompletedAction = destroyCompletedAction(model.completedItems);
 
         // This will resolve the promise and make the model object available in the todoapp.html view
         defer.resolve(model);

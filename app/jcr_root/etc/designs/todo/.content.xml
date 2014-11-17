@@ -2,9 +2,10 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
-        cq:lastModified="{Date}2011-09-26T23:42:43.050+02:00"
+        cq:lastModified="{Date}2012-10-26T15:21:39.265-04:00"
         cq:lastModifiedBy="admin"
         jcr:primaryType="nt:unstructured"
+        jcr:title="Todo Design"
         sling:resourceType="wcm/core/components/designer"/>
     <clientlib/>
     <images/>

@@ -29,12 +29,11 @@ use(function () {
     'use strict';
 
     /**
-     * A working replacement to Rhino's useless Array.indexOf(Object) method 
+     * A working replacement to Rhino's useless Array.indexOf(Object) method.
      */
     function contains(array, obj) {
         for (var i = 0, l = array.length; i < l; i++) {
-            // This non-strict comparison is on purpose for Rhino to do the expected
-            if (array[i] == obj) { // jshint ignore:line
+            if (String(array[i]) === obj) {
                 return true;
             }
         }
@@ -42,8 +41,7 @@ use(function () {
     }
 
     var selector = '';
-    var selectorList = request.getRequestPathInfo().getSelectors();
-    
+    var selectorList = granite.request.pathInfo.selectors;
     if (contains(selectorList, 'active')) {
         selector = 'active';
     } else if (contains(selectorList, 'completed')) {

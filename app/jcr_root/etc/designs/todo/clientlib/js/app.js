@@ -23,47 +23,51 @@
     
     // Variables global to this script
     var todoapp = $('#todoapp');
-    var key = {
-        enter: 13,
-        escape: 27
+    var updatePath = todoapp.data('update-path');
+    var KEY = {
+        ENTER: 13,
+        ESCAPE: 27
     };
-
+    
     /**
-     * Generic function that POSTs some action to the server and subsequently updates the view.
-     * It takes the path and payload data attributes of the element and builds an
-     * asynchronous POST request with it. Optionally, a value can be provided, which will
-     * be integrated into the payload. Once the POST is done, it refreshes the view with
-     * an asynchronous GET request.
+     * Refreshes asynchronously the content of the Todo app
      */
-    function performAction(element, value) {
-        // One line of magic to retreive the right element, depending on how the function was called
-        element = (element instanceof $) ? element : $(element.target || element);
-        
-        var updatePath = todoapp.data('update-path');
-        var path = element.data('path');
-        var payload = element.data('payload');
-        var payloadInput = element.data('payload-input');
-        
-        // Add the value to the payload if it was provided and if there is a data-payload-input attribute
-        if (payloadInput && value !== undefined) {
-            payload[payloadInput] = value;
-        }
-        
-        // Do the post and subsequently update the view
-        $.post(path, payload).done(function () {
-            todoapp.load(updatePath);
-        });
+    function updateView() {
+        todoapp.load(updatePath);
     }
 
     /**
-     * Add a new todo item using sling default post servlet
+     * Generic function that POSTs an action to the server and subsequently updates the view.
+     * Once the POST is done, it refreshes the view with an asynchronous GET request.
+     * {HTMLElement} element: The element that must have an action data attribute with following JSON:
+     *     {String} path: The URL to which the POST will be sent.
+     *     {Object} data: The form data to submit, should be in the form of JSON key-value pairs.
+     *     {String} append: If set, it defines the key to add to the POST data with the provided value.
+     * {String} value: If provided, it provides the value of the key that is appended to the POST payload.
+     */
+    function performAction(element, value) {
+        // One line of magic to retreive the right element, depending on how the function was called.
+        element = (element instanceof $) ? element : $(element.target || element);
+        var action = element.data('action');
+        
+        // Add the value to the payload if it was provided and if an append variable is provided in the action json.
+        if (action.append && value !== undefined) {
+            action.data[action.append] = value;
+        }
+        
+        // Do the post and subsequently update the view.
+        $.post(action.path, action.data).done(updateView);
+    }
+
+    /**
+     * Adds a new todo item.
      */
     function addItem(event) {
-        if (event.which === key.enter) {
+        if (event.which === KEY.ENTER) {
             var input = $(this);
             var value = input.val().trim();
             
-            // Only create the item if the input value is not empty
+            // Only create the item if the input value is not empty.
             if (value.length) {
                 performAction(input, value);
             }
@@ -71,39 +75,39 @@
     }
     
     /**
-     * Toggle the view, show textbox or label
+     * Changes the item view to text input editing.
      */
     function editItem() {
         $(this).closest('li').addClass('editing').find('.edit').focus();
     }
     
     /**
-     * Submit updated item title and toggle the view to show the item
+     * Submits updated item title and changes it's view back from editing.
      */
     function updateItem(event) {
         var input = $(this);
         var item = input.closest('li');
         
-        // Check that the item hasn't already been edited, because this method can be
-        // called twice: once for hitting the enter key and once for the lost focus
+        // Check that the item hasn't already been edited, because this method could
+        // be called twice: once for hitting the enter key and once for the lost focus.
         if (item.hasClass('editing')) {
 
-            // Submit changes if focused out of input or if enter was pressed
-            if (event.type === 'focusout' || event.which === key.enter) {
+            // Submit changes if focused out of input or if enter was pressed.
+            if (event.type === 'focusout' || event.which === KEY.ENTER) {
                 var value = input.val().trim();
 
                 item.removeClass('editing').find('label').text(value);
 
-                // Only save if the value is not empty
+                // Only save if the value is not empty.
                 if (value.length) {
                     performAction(input, value);
-                // Remove the item if the value was left empty
+                // Remove the item if the value was left empty.
                 } else {
                     item.find('.destroy').trigger('click');
                 }
 
-            // If escape was pressed, reset everything
-            } else if (event.which === key.escape) {
+            // If escape was pressed, reset everything.
+            } else if (event.which === KEY.ESCAPE) {
                 item.removeClass('editing');
                 input.val(item.find('label').text());
             }
@@ -111,7 +115,7 @@
     }
 
     /**
-     * Complete/reopen a todo item
+     * Completes/reopens a todo item.
      */
     function toggleItem() {
         var input = $(this);

@@ -28,6 +28,6 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
     var filterSelector = filters.isAll ? '' : ('.' + filters.selector);
     
     return {
-        updatePath: currentPage.getPath() + '.todoapp' + filterSelector + '.html'
+        updatePath: wcm.currentPage.path + '.todoapp' + filterSelector + '.html'
     };
 });

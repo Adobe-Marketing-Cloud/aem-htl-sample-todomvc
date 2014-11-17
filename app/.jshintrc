@@ -19,5 +19,5 @@
     "validthis": true,
 
     // Globals
-    "predef": [ "jQuery", "use", "granite", "request", "resource", "properties", "currentPage" ]
+    "predef": [ "jQuery", "use", "granite", "wcm"]
 }
