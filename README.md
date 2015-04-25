@@ -12,8 +12,8 @@ The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-
 
 You can also read following blog posts:
 
-* [Sightly intro part 1](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/01/sightly-preview-part1.html)
-* [Sightly intro part 2](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/01/sightly-preview-part2.html)
+* [Sightly intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-1/)
+* [Sightly intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-2/)
 * [Sightly intro part 3](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/03/sightly-intro-part3.html)
 * [Sightly intro part 4](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/04/sightly-intro-part-4.html)
 * [Sightly intro part 5: FAQ](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/05/sightly-intro-part-5-faq.html)
