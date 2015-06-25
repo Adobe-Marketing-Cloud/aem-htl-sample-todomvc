@@ -31,10 +31,8 @@
  * {Object} toggleAllAction: Creates the JSON that describes the POST action for completing/reopening all todo items
  * {Object} destroyCompletedAction: Creates the JSON that describes the POST action for removing all completed todo items
  */
-use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'], function (Q, model) {
+use(['/apps/todo/components/utils/filters.js'], function (model) {
     'use strict';
-
-    var defer = Q.defer();
 
     /**
      * Generates JSON for the POST action to add new todo items.
@@ -83,9 +81,11 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
             }
         });
     }
-
+    
+    
     // We need to retrieve the todo items first, which are the children of the page.
-    granite.resource.getChildren().then(function (children) {
+    // Since getting the page children is an async call, we have to return a promise
+    return granite.resource.getChildren().then(function (children) {
         // Convenient list of paths to the various todo items.
         model.allItems = [];
         model.completedItems = [];
@@ -111,9 +111,7 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
         model.destroyCompletedAction = destroyCompletedAction(model.completedItems);
 
         // This will resolve the promise and make the model object available in the todoapp.html view
-        defer.resolve(model);
+        return model;
     });
 
-    // Since getting the page children is an async call, we have to return a promise
-    return defer.promise;
 });
