@@ -63,13 +63,13 @@ The nodes located in the content repository at `/content/todo` are serialized in
   * [`todoapp.html`](src/jcr_root/apps/todo/components/page/todoapp.html)
     Renders the list of todo items. **Called** directly when fetching what changed in the view.
   * [`todoapp.js`](src/jcr_root/apps/todo/components/page/todoapp.js)
-    Server-side script that prepares additional data model needed by `todoapp.html`; also defines the data attributes that will instruct the front-end POST requests.
+    Server-side script that prepares additional data model needed by the template, which also defines the data attributes that instruct the front-end POST requests.
 * [`item`](src/jcr_root/apps/todo/components/item)
   Renders the todo item content nodes.
   * [`item.html`](src/jcr_root/apps/todo/components/item/item.html)
     Renders the markup for the items.
   * [`item.js`](src/jcr_root/apps/todo/components/item/item.js)
-    Server-side script that prepares additional data model needed by `item.html`; also defines the data attributes that will instruct the front-end POST requests.
+    Server-side script that prepares additional data model needed by the template, which also defines the data attributes that instruct the front-end POST requests.
 * [`utils`](src/jcr_root/apps/todo/components/utils)
   Collection of reusable scripts.
   * [`filters.js`](src/jcr_root/apps/todo/components/utils/filters.js)
