@@ -35,7 +35,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
      */
     function updateItemAction() {
         return JSON.stringify({
-            path: String(granite.resource.path),
+            path: String(resource.path),
             data: {
                 '_charset_': 'utf-8'
             },
@@ -49,7 +49,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
      */
     function destroyItemAction() {
         return JSON.stringify({
-            path: String(granite.resource.path),
+            path: String(resource.path),
             data: {
                 ':operation': 'delete'
             }
@@ -61,7 +61,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
      */
     function toggleItemAction() {
         return JSON.stringify({
-            path: String(granite.resource.path),
+            path: String(resource.path),
             data: {
                 'completed@TypeHint': 'Boolean'
             },
@@ -70,8 +70,7 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
         });
     }
 
-    var isCompleted = ('completed' in granite.resource.properties) &&
-            (granite.resource.properties.completed === true || granite.resource.properties.completed.equals(true));
+    var isCompleted = properties.get('completed') == true; //jshint ignore:line, Accommodate to Rhino's strange way of typing booleans
     model.show = filters.isAll || (filters.isCompleted === isCompleted);
 
     if (model.show) {

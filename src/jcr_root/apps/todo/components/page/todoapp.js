@@ -31,19 +31,19 @@
  * {Object} toggleAllAction: Creates the JSON that describes the POST action for completing/reopening all todo items
  * {Object} destroyCompletedAction: Creates the JSON that describes the POST action for removing all completed todo items
  */
-use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'], function (Q, model) {
+use('/apps/todo/components/utils/filters.js', function (filters) {
     'use strict';
 
-    var defer = Q.defer();
+    var model = filters;
 
     /**
      * Generates JSON for the POST action to add new todo items.
      */
     function addItemAction() {
         return JSON.stringify({
-            path: String(granite.resource.path) + '/*',
+            path: String(resource.path) + '/*',
             data: {
-                'sling:resourceType': String(granite.properties.itemResourceType),
+                'sling:resourceType': String(properties.get('itemResourceType')),
                 '_charset_': 'utf-8'
             },
             // The key of the value to be added to the data payload.
@@ -55,9 +55,9 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
      * Generates JSON flr the POST action to complete/reopen all todo items.
      */
     function toggleAllAction(activeItems, completedItems) {
-        var data = {};
-        var completed = (activeItems.length === 0);
-        var toggleItems = completed ? completedItems : activeItems;
+        var data = {},
+            completed = (activeItems.length === 0),
+            toggleItems = completed ? completedItems : activeItems;
 
         for (var i = 0, l = toggleItems.length; i < l; i++) {
             var path = toggleItems[i];
@@ -66,7 +66,7 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
         }
 
         return JSON.stringify({
-            path: String(wcm.currentPage.path),
+            path: String(currentPage.path),
             data: data
         });
     }
@@ -76,7 +76,7 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
      */
     function destroyCompletedAction(completedItems) {
         return JSON.stringify({
-            path: String(wcm.currentPage.path),
+            path: String(currentPage.path),
             data: {
                 ':operation': 'delete',
                 ':applyTo': completedItems
@@ -84,36 +84,31 @@ use(['/libs/sightly/js/3rd-party/q.js', '/apps/todo/components/utils/filters.js'
         });
     }
 
+    // Convenient list of paths to the various todo items.
+    model.allItems = [];
+    model.completedItems = [];
+    model.activeItems = [];
+
     // We need to retrieve the todo items first, which are the children of the page.
-    granite.resource.getChildren().then(function (children) {
-        // Convenient list of paths to the various todo items.
-        model.allItems = [];
-        model.completedItems = [];
-        model.activeItems = [];
+    var children = resource.resourceResolver.listChildren(resource);
+    while (children.hasNext()) {
+        var child = children.next();
+        var childPath = child.path;
+        var childProperties = child.adaptTo(Packages.org.apache.sling.api.resource.ValueMap);
+        var isCompleted = childProperties.get('completed') == true; //jshint ignore:line, Accommodate to Rhino's strange way of typing booleans
 
-        // Let's fill the above arrays...
-        for (var i = 0, l = children.length; i < l; i += 1) {
-            var child = children[i];
-            var path = child.path;
-            var isCompleted = ('completed' in child.properties) && child.properties.completed.equals(true);
-            
-            model.allItems.push(path);
-            if (isCompleted) {
-                model.completedItems.push(path);
-            } else {
-                model.activeItems.push(path);
-            }
+        model.allItems.push(childPath);
+        if (isCompleted) {
+            model.completedItems.push(childPath);
+        } else {
+            model.activeItems.push(childPath);
         }
+    }
 
-        // The JSON for the POST request of the various actions
-        model.addItemAction = addItemAction();
-        model.toggleAllAction = toggleAllAction(model.activeItems, model.completedItems);
-        model.destroyCompletedAction = destroyCompletedAction(model.completedItems);
-
-        // This will resolve the promise and make the model object available in the todoapp.html view
-        defer.resolve(model);
-    });
-
-    // Since getting the page children is an async call, we have to return a promise
-    return defer.promise;
+    // The JSON for the POST request of the various actions
+    model.addItemAction = addItemAction();
+    model.toggleAllAction = toggleAllAction(model.activeItems, model.completedItems);
+    model.destroyCompletedAction = destroyCompletedAction(model.completedItems);
+    
+    return model;
 });

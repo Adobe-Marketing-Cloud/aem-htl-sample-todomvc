@@ -33,7 +33,7 @@ use(function () {
      */
     function contains(array, obj) {
         for (var i = 0, l = array.length; i < l; i++) {
-            if (String(array[i]) === obj) {
+            if (array[i] == obj) { //jshint ignore:line, Non-strict comparison to accomodate Rhino's Java type mapping
                 return true;
             }
         }
@@ -41,7 +41,7 @@ use(function () {
     }
 
     var selector = '';
-    var selectorList = granite.request.pathInfo.selectors;
+    var selectorList = request.requestPathInfo.selectors;
     if (contains(selectorList, 'active')) {
         selector = 'active';
     } else if (contains(selectorList, 'completed')) {
