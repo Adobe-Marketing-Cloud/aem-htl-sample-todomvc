@@ -1,8 +1,0 @@
-{
-    "extends": "../../../../.jshintrc",
-    "validthis": true,
-    "browser": true,
-    "predef": [
-        "jQuery"
-    ]
-}
