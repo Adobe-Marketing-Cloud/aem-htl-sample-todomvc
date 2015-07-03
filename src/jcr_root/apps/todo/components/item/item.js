@@ -20,7 +20,6 @@
 
 /**
  * Returns an object with following members:
- * {Boolean} show: True when the item is to be displayed (i.e. the all/active/completed filters include it)
  * {Object} updateItemAction: Creates the JSON that describes the POST action for editing the text of the item
  * {Object} destroyItemAction: Creates the JSON that describes the POST action for removing the item
  * {Object} toggleItemAction: Creates the JSON that describes the POST action for marking the item as complete or active
