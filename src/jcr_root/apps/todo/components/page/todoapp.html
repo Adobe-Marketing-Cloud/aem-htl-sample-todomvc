@@ -1,10 +1,10 @@
 <header id="header" data-sly-use.model="todoapp.js">
     <h1>${properties.jcr:title}</h1>
-    <input id="new-todo" placeholder="${properties.labelNewItem}" autofocus data-action="${model.addItemAction}">
+    <input id="new-todo" placeholder="${properties.labelNewItem}" autofocus data-action="${model.addItemAction}"/>
 </header>
 
 <section id="main" data-sly-test="${model.allItems}">
-    <input id="toggle-all" type="checkbox" checked="${!model.activeItems}" data-action="${model.toggleAllAction}">
+    <input id="toggle-all" type="checkbox" checked="${!model.activeItems}" data-action="${model.toggleAllAction}"/>
     <label for="toggle-all">${properties.labelToggleAll}</label>
     <ul id="todo-list" data-sly-list="${resource.listChildren}">
         <sly data-sly-resource="${item.name}" data-sly-unwrap/>

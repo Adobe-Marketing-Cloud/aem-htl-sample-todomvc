@@ -1,8 +1,8 @@
 <li class="${properties.completed && 'completed'}" data-sly-use.model="item.js" data-sly-test="${model.show}">
     <div class="view">
-        <input class="toggle" type="checkbox" checked="${properties.completed}" data-action="${model.toggleItemAction}">
+        <input class="toggle" type="checkbox" checked="${properties.completed}" data-action="${model.toggleItemAction}"/>
         <label>${properties.jcr:title}</label>
         <button class="destroy" data-action="${model.destroyItemAction}"></button>
     </div>
-    <input class="edit" value="${properties.jcr:title}" data-action="${model.updateItemAction}">
+    <input class="edit" value="${properties.jcr:title}" data-action="${model.updateItemAction}"/>
 </li>
