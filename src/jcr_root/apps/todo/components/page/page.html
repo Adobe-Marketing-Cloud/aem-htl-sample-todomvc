@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>${properties.jcr:title}</title>
-        <output data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap>
+        <sly data-sly-call="${clientLib.css @ categories='todo'}" data-sly-unwrap/>
 	</head>
 
 	<body data-sly-use.model="page.js">
@@ -16,6 +16,6 @@
 			<p><a href="http://todomvc.com">${'Part of TodoMVC' @ i18n}</a></p>
 		</footer>
 
-        <output data-sly-call="${clientLib.js @ categories='todo'}" data-sly-unwrap>
+        <sly data-sly-call="${clientLib.js @ categories='todo'}" data-sly-unwrap/>
 	</body>
 </html>

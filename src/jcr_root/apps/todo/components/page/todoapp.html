@@ -7,7 +7,7 @@
     <input id="toggle-all" type="checkbox" checked="${!model.activeItems}" data-action="${model.toggleAllAction}">
     <label for="toggle-all">${properties.labelToggleAll}</label>
     <ul id="todo-list" data-sly-list="${resource.listChildren}">
-        <output data-sly-resource="${item.name}" data-sly-unwrap>
+        <sly data-sly-resource="${item.name}" data-sly-unwrap/>
     </ul>
 </section>
 
