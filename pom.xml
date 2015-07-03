@@ -52,6 +52,7 @@
                     <exclude>**/.DS_Store</exclude>
                     <exclude>**/target/**</exclude>
                     <exclude>**/pom.xml</exclude>
+                    <exclude>**/.brackets.json</exclude>
                     <exclude>**/.jshintrc</exclude>
                 </excludes>
             </resource>
