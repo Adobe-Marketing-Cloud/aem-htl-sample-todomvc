@@ -8,16 +8,19 @@ All in about 300 lines of server- and client-side JavaScript code, following the
 
 Sightly is the new HTML templating system, introduced with AEM 6.0. It takes the place of JSP (Java Server Pages) and ESP (ECMAScript Server Pages) as the preferred HTML templating system for AEM.
 
-The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-0/develop/sightly.html) is a great resource for getting started.
+The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-1/develop/sightly.html) is a great resource for getting started.
 
 You can also read following blog posts:
 
+* [New Sightly Features in AEM 6.1](http://blogs.adobe.com/experiencedelivers/experience-management/new-sightly-features/)
+* [Javascript Use-API With Sightly](http://blogs.adobe.com/experiencedelivers/experience-management/4-ways-try-javascript-use-api-sightly/)
 * [Sightly intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-1/)
 * [Sightly intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-2/)
-* [Sightly intro part 3](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/03/sightly-intro-part3.html)
-* [Sightly intro part 4](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/04/sightly-intro-part-4.html)
-* [Sightly intro part 5: FAQ](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/05/sightly-intro-part-5-faq.html)
-* [Sightly and Clientlibs](http://experiencedelivers.adobe.com/cemblog/en/experiencedelivers/2014/06/sightly-and-clientlibs.html)
+* [Sightly intro part 3](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-3-2/)
+* [Sightly intro part 4](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-4/)
+* [Sightly intro part 5: FAQ](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-5-faq/)
+* [Sightly and Clientlibs](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-clientlibs/)
+* [Date Formatting with Sightly](http://blogs.adobe.com/experiencedelivers/experience-management/date-formatting-sightly/)
 
 Get help from other Sightly users:
 
