@@ -25,7 +25,7 @@
  * {Object} destroyItemAction: Creates the JSON that describes the POST action for removing the item
  * {Object} toggleItemAction: Creates the JSON that describes the POST action for marking the item as complete or active
  */
-use('/apps/todo/components/utils/filters.js', function (filters) {
+use(function () {
     'use strict';
     
     var model = {};
@@ -70,15 +70,10 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
         });
     }
 
-    var isCompleted = properties.get('completed') == true; //jshint ignore:line, Accommodate to Rhino's strange way of typing booleans
-    model.show = filters.isAll || (filters.isCompleted === isCompleted);
-
-    if (model.show) {
-        // The JSON for the POST request of the various actions
-        model.updateItemAction = updateItemAction();
-        model.destroyItemAction = destroyItemAction();
-        model.toggleItemAction = toggleItemAction();
-    }
+    // The JSON for the POST request of the various actions
+    model.updateItemAction = updateItemAction();
+    model.destroyItemAction = destroyItemAction();
+    model.toggleItemAction = toggleItemAction();
 
     return model;
 });

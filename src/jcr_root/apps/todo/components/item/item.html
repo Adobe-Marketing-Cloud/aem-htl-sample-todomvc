@@ -1,4 +1,4 @@
-<li class="${properties.completed && 'completed'}" data-sly-use.model="item.js" data-sly-test="${model.show}">
+<li class="${properties.completed && 'completed'}" data-sly-use.model="item.js">
     <div class="view">
         <input class="toggle" type="checkbox" checked="${properties.completed}" data-action="${model.toggleItemAction}"/>
         <label>${properties.jcr:title}</label>

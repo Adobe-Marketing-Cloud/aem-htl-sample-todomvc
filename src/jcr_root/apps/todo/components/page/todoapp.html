@@ -6,8 +6,8 @@
 <section id="main" data-sly-test="${model.allItems}">
     <input id="toggle-all" type="checkbox" checked="${!model.activeItems}" data-action="${model.toggleAllAction}"/>
     <label for="toggle-all">${properties.labelToggleAll}</label>
-    <ul id="todo-list" data-sly-list="${resource.listChildren}">
-        <sly data-sly-resource="${item.name}" data-sly-unwrap/>
+    <ul id="todo-list" data-sly-list="${model.displayItems}">
+        <sly data-sly-resource="${item}" data-sly-unwrap/>
     </ul>
 </section>
 

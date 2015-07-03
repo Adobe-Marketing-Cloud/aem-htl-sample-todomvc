@@ -27,6 +27,7 @@
  * {Array} allItems: Resource paths of all todo items
  * {Array} completedItems: Resource paths of the completed items
  * {Array} activeItems: Resource paths of the active items
+ * {Array} displayItems: Resource paths of the items to dispay (based on the isAll, isActive and isCompleted status)
  * {Object} addItemAction: Creates the JSON that describes the POST action for adding new todo items
  * {Object} toggleAllAction: Creates the JSON that describes the POST action for completing/reopening all todo items
  * {Object} destroyCompletedAction: Creates the JSON that describes the POST action for removing all completed todo items
@@ -86,8 +87,8 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
 
     // Convenient list of paths to the various todo items.
     model.allItems = [];
-    model.completedItems = [];
     model.activeItems = [];
+    model.completedItems = [];
 
     // We need to retrieve the todo items first, which are the children of the page.
     var children = resource.resourceResolver.listChildren(resource);
@@ -103,6 +104,15 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
         } else {
             model.activeItems.push(childPath);
         }
+    }
+    
+    // Define which items have to be displayed
+    if (filters.isAll) {
+        model.displayItems = model.allItems;
+    } else if (filters.isActive) {
+        model.displayItems = model.activeItems;
+    } else if (filters.isCompleted) {
+        model.displayItems = model.completedItems;
     }
 
     // The JSON for the POST request of the various actions
