@@ -1,0 +1,6 @@
+{
+    "eqeqeq": true,
+    "strict": true,
+    "undef":  true,
+    "unused": true
+}
