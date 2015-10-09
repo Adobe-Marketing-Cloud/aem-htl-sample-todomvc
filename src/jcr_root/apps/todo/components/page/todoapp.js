@@ -91,18 +91,18 @@ use('/apps/todo/components/utils/filters.js', function (filters) {
     model.completedItems = [];
 
     // We need to retrieve the todo items first, which are the children of the page.
-    var children = resource.resourceResolver.listChildren(resource);
+    var children = resource.listChildren();
     while (children.hasNext()) {
         var child = children.next();
         var childPath = child.path;
         var childProperties = child.adaptTo(Packages.org.apache.sling.api.resource.ValueMap);
         var isCompleted = childProperties.get('completed') == true; //jshint ignore:line, Accommodate to Rhino's strange way of typing booleans
 
-        model.allItems.push(childPath);
+        model.allItems.push(String(childPath));
         if (isCompleted) {
-            model.completedItems.push(childPath);
+            model.completedItems.push(String(childPath));
         } else {
-            model.activeItems.push(childPath);
+            model.activeItems.push(String(childPath));
         }
     }
     
