@@ -1,34 +1,34 @@
-# Sightly TodoMVC Example
+# HTL TodoMVC Example
 
-This example shows how to build components in [AEM 6](http://www.adobe.com/go/aem) with Sightly. It's a feature-complete implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
+This example shows how to build components in [AEM 6](http://www.adobe.com/go/aem) with [HTL](https://github.com/Adobe-Marketing-Cloud/htl-spec). It's a feature-complete implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
 
 All in about 300 lines of server- and client-side JavaScript code, following the latest AEM best practice!
 
-## Learning Sightly
+## Learning HTL
 
-Sightly is the new HTML templating system, introduced with AEM 6.0. It takes the place of JSP (Java Server Pages) and ESP (ECMAScript Server Pages) as the preferred HTML templating system for AEM.
+The [HTML Template Language](https://docs.adobe.com/docs/en/htl.html "Introduction to the HTML Template Language") (HTL), formerly known as Sightly, has been introduced with [Adobe Experience Manager](http://www.adobe.com/solutions/web-experience-management.html) 6.0 and takes the place of JSP (JavaServer Pages) as the preferred and recommended server-side template system for HTML.
 
-The [Sightly Documentation on the AEM Site](http://docs.adobe.com/docs/en/aem/6-1/develop/sightly.html) is a great resource for getting started.
+The [HTML Template Language documentation on the AEM Site](https://docs.adobe.com/docs/en/htl.html) is a great resource for getting started.
 
 You can also read following blog posts:
 
-* [New Sightly Features in AEM 6.1](http://blogs.adobe.com/experiencedelivers/experience-management/new-sightly-features/)
-* [Javascript Use-API With Sightly](http://blogs.adobe.com/experiencedelivers/experience-management/4-ways-try-javascript-use-api-sightly/)
-* [Sightly intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-1/)
-* [Sightly intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-2/)
-* [Sightly intro part 3](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-3-2/)
-* [Sightly intro part 4](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-4/)
-* [Sightly intro part 5: FAQ](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-5-faq/)
-* [Sightly and Clientlibs](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-clientlibs/)
-* [Date Formatting with Sightly](http://blogs.adobe.com/experiencedelivers/experience-management/date-formatting-sightly/)
+* [New HTL Features in AEM 6.1](http://blogs.adobe.com/experiencedelivers/experience-management/new-sightly-features/)
+* [Javascript Use-API With HTL](http://blogs.adobe.com/experiencedelivers/experience-management/4-ways-try-javascript-use-api-sightly/)
+* [HTL intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-1/)
+* [HTL intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-2/)
+* [HTL intro part 3](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-3-2/)
+* [HTL intro part 4](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-4/)
+* [HTL intro part 5: FAQ](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-5-faq/)
+* [HTL and Clientlibs](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-clientlibs/)
+* [Date Formatting with HTL](http://blogs.adobe.com/experiencedelivers/experience-management/date-formatting-sightly/)
 
-Get help from other Sightly users:
+Get help from other HTL users:
 
-* [Sightly](https://twitter.com/sightlyio)
+* [HTL](https://twitter.com/sightlyio)
 * [Gabriel](https://twitter.com/gabrielwalt)
 * [Senol](https://twitter.com/thelabertasch)
 
-If you are interested to learn how we came up with Sightly, check out the [Behind the Scenes Youtube channel](https://www.youtube.com/playlist?list=PLkBe8kbE_7-xeo5uNJVE4uZXRpOpCA0J8).
+If you are interested to learn how we came up with HTL, check out the [Behind the Scenes Youtube channel](https://www.youtube.com/playlist?list=PLkBe8kbE_7-xeo5uNJVE4uZXRpOpCA0J8).
 
 ## Implementation
 
