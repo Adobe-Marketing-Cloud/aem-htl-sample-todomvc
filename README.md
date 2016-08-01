@@ -1,6 +1,6 @@
 # HTL TodoMVC Example
 
-This example shows how to build components in [AEM 6](http://www.adobe.com/go/aem) with [HTL](https://github.com/Adobe-Marketing-Cloud/htl-spec). It's a feature-complete implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
+This example shows how to build components in [AEM 6+](http://www.adobe.com/go/aem) with [HTL](https://github.com/Adobe-Marketing-Cloud/htl-spec). It's a feature-complete implementation of the famous [TodoMVC](http://todomvc.com) exercise, which is traditionally meant for client-side JavaScript frameworks. This implementation though shows how such an application can easily be built in AEM and it's status persisted on the server using the Apache Sling REST framework.
 
 All in about 300 lines of server- and client-side JavaScript code, following the latest AEM best practice!
 
@@ -12,19 +12,19 @@ The [HTML Template Language documentation on the AEM Site](https://docs.adobe.co
 
 You can also read following blog posts:
 
-* [New HTL Features in AEM 6.1](http://blogs.adobe.com/experiencedelivers/experience-management/new-sightly-features/)
-* [Javascript Use-API With HTL](http://blogs.adobe.com/experiencedelivers/experience-management/4-ways-try-javascript-use-api-sightly/)
-* [HTL intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-1/)
-* [HTL intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-2/)
-* [HTL intro part 3](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-3-2/)
-* [HTL intro part 4](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-4/)
-* [HTL intro part 5: FAQ](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-intro-part-5-faq/)
-* [HTL and Clientlibs](http://blogs.adobe.com/experiencedelivers/experience-management/sightly-clientlibs/)
-* [Date Formatting with HTL](http://blogs.adobe.com/experiencedelivers/experience-management/date-formatting-sightly/)
+* [New HTL Features in AEM 6.1](http://blogs.adobe.com/experiencedelivers/experience-management/htl-features-aem61/)
+* [Javascript Use-API With HTL](http://blogs.adobe.com/experiencedelivers/experience-management/htl-javascript-use-api/)
+* [HTL intro part 1](http://blogs.adobe.com/experiencedelivers/experience-management/htl-intro-part-1/)
+* [HTL intro part 2](http://blogs.adobe.com/experiencedelivers/experience-management/htl-intro-part-2/)
+* [HTL intro part 3](http://blogs.adobe.com/experiencedelivers/experience-management/htl-intro-part-3/)
+* [HTL intro part 4](http://blogs.adobe.com/experiencedelivers/experience-management/htl-intro-part-4/)
+* [HTL intro part 5: FAQ](http://blogs.adobe.com/experiencedelivers/experience-management/htl-intro-part-5/)
+* [HTL and Clientlibs](http://blogs.adobe.com/experiencedelivers/experience-management/htl-clientlibs/)
+* [Date Formatting with HTL](http://blogs.adobe.com/experiencedelivers/experience-management/htl-date-formatting/)
 
 Get help from other HTL users:
 
-* [HTL](https://twitter.com/sightlyio)
+* [HTL](https://twitter.com/Adobe_HTL)
 * [Gabriel](https://twitter.com/gabrielwalt)
 * [Senol](https://twitter.com/thelabertasch)
 
@@ -41,7 +41,7 @@ Beyond the classic MVC, this architecture also has following particularities:
 * To retreive the HTML fragment of what must be updated on the page, a simple `todoapp` [selector](http://sling.apache.org/documentation/the-sling-engine/url-decomposition.html) allows to trigger the specific template that handles that part of the view.
 * The filters (to show all, or only active or completed items) use an additional selector, which allows the server to know which items to render.
 
-Note that [Java](http://docs.adobe.com/docs/en/aem/6-1/develop/sightly/use-api-in-java.html) could also have been used instead of the server-side JavaScript files.
+Note that [Java](https://docs.adobe.com/docs/en/htl/use-api/java.html) could also have been used instead of the server-side JavaScript files.
 
 #### Content
 
@@ -52,7 +52,7 @@ The nodes located in the content repository at `/content/todo` are serialized in
 
 #### Server-side components
 
-[AEM components](http://dev.day.com/docs/en/cq/current/developing/components.html) render individual content nodes based on their `sling:resourceType` properties.
+[AEM components](https://docs.adobe.com/docs/en/aem/6-2/develop/components.html) render individual content nodes based on their `sling:resourceType` properties.
 
 * [`page`](src/jcr_root/apps/todo/components/page)
   Renders the page content node.
@@ -77,7 +77,7 @@ The nodes located in the content repository at `/content/todo` are serialized in
 
 #### Client-side libraries
 
-[Client libraries](http://dev.day.com/docs/en/cq/current/developing/clientlibs.html) can conveniently combine and minimize multiple CSS and JS files:
+[Client libraries](https://docs.adobe.com/docs/en/aem/6-2/develop/the-basics/clientlibs.html) can conveniently combine and minimize multiple CSS and JS files:
 
 * [`clientlib`](src/jcr_root/etc/designs/todo/clientlib)
   * [`css.txt`](src/jcr_root/etc/designs/todo/clientlib/css.txt)
